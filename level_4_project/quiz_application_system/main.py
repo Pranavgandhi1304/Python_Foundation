@@ -1,18 +1,20 @@
 from file_handler import load_questions
-
+from quiz_logic import ask_question, check_answe
 def main():
     questions = load_questions()
 
     if not questions:
         print("No questions available. Exiting cleanly.")
         return
-
-    print("Loaded Questions:\n")
-    for idx, q in enumerate(questions, start=1):
-        print(f"Q{idx}: {q['question']}")
-        print(f"   Correct Answer: {q['answer']}")
-        print(f"   Wrong Answers: {', '.join(q['wrong_answers'])}")
-        print()
-
+    score = 0
+    
+    for q in questions:
+        user_choice = ask_question(q)
+        if check_answer(q, user_choice):
+            print("Correct!\n")
+            score += 1
+        else:
+            print(f"Wrong! Correct answer was: {q['answer']}\n")
 if __name__ == "__main__":
+
     main()
