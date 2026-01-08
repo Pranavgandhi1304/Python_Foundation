@@ -1,0 +1,11 @@
+What is 2 + 2?
+4
+3,5,6
+
+Who created Python?
+Guido van Rossum
+Dennis Ritchie,James Gosling,Bjarne Stroustrup
+
+What is your name?
+Pranav
+Rishab Soni, Ved Loya, Harshita arak
