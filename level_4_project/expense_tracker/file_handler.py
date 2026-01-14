@@ -2,15 +2,9 @@ import os
 def get_expenses_file():
     return os.path.join(os.path.dirname(__file__), "data", "expenses.txt")
 def load_expenses():
-    """
-    Load expenses from file.
-    Returns a list of dicts: [{amount, category, note}, ...]
-    Handles missing/empty file gracefully.
-    """
     expenses_file = get_expenses_file()
     if not os.path.exists(expenses_file):
         return []
-
     with open(expenses_file, "r", encoding="utf-8") as f:
         lines = [line.strip() for line in f if line.strip()]
     expenses = []
