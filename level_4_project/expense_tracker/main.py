@@ -31,6 +31,14 @@ def view_expenses():
     for e in expenses:
         print(format_expense(e))
 
+def show_total_spent():
+    expenses = load_expenses()
+    if not expenses:
+        print("NO expenses recorded yet.")
+        return
+    total = sum(e["amount"] for e in expenses)
+    print(f"\nTotal amount spend: {total}")
+
 def main():
     while True:
         print("\nExpense Tracker")
@@ -49,3 +57,4 @@ def main():
             print("Invalid choice. Please try again.")
 if __name__ == "__main__":
     main()
+
