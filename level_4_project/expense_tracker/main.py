@@ -1,5 +1,6 @@
 from file_handler import save_expense, load_expenses
 from expense_logic import format_expense
+
 def add_expense():
     while True:
         try:
@@ -22,6 +23,7 @@ def add_expense():
         save_expense(amount, category, note)
         print("Expense added successfully!")
         break
+
 def view_expenses():
     expenses = load_expenses()
     if not expenses:
@@ -34,27 +36,48 @@ def view_expenses():
 def show_total_spent():
     expenses = load_expenses()
     if not expenses:
-        print("NO expenses recorded yet.")
+        print("No expenses recorded yet.")
         return
     total = sum(e["amount"] for e in expenses)
-    print(f"\nTotal amount spend: {total}")
+    print(f"\nTotal amount spent: {total}")
 
+def filter_by_category():
+    expenses = load_expenses()
+    if not expenses:
+        print("No expenses recorded yet.")
+        return
+    category = input("Enter category to filter: ").strip()
+    if not category:
+        print("Category cannot be empty.")
+        return
+    matches = [e for e in expenses if e["category"].lower() == category.lower()]
+    if not matches:
+        print(f"No expenses found for category '{category}'.")
+        return
+    print(f"\nExpenses in category '{category}'")
+    for e in matches:
+        print(format_expense(e))
 def main():
     while True:
         print("\nExpense Tracker")
         print("1. Add Expense")
         print("2. View All Expenses")
-        print("3. Exit")
+        print("3. Show Total Spent")
+        print("4. Filter by Category")
+        print("5. Exit")
         choice = input("Enter your choice: ").strip()
         if choice == "1":
             add_expense()
         elif choice == "2":
             view_expenses()
         elif choice == "3":
-            print("bye!")
+            show_total_spent()
+        elif choice == "4":
+            filter_by_category()
+        elif choice == "5":
+            print("Goodbye!")
             break
         else:
             print("Invalid choice. Please try again.")
 if __name__ == "__main__":
     main()
-
